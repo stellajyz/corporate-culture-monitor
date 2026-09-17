@@ -1,232 +1,326 @@
 # Corporate Culture Monitor
-This repository contains the full-stack AI-powered Corporate Culture Monitor platform developed for the UNSW COMP9900 capstone project. It follows a monorepo structure.
 
+A full-stack analytics platform for collecting, processing, analysing, and visualising external corporate culture signals using Python, NLP, REST APIs, and React.
 
-## Project Background
-Commissioned by Rio Tinto, we developed an automated system to monitor, analyze, and report corporate culture signals in external public opinion using Natural Language Processing and generative AI, providing a high-level overview of relevant external cultural signals. This system aggregates posts, news articles, sentiment indicators, and dimensional summaries to help users quickly understand the corporate culture atmosphere. Subsequently, through structured narratives, risks, opportunities, and recommendations, it guides leadership from a macro-level cultural overview to granular, topic-specific interpretations, supporting data-driven cultural analysis and decision-making.
+This project was originally developed as part of the UNSW COMP9900 capstone project in a student team for an industry client. This repository is a cleaned public portfolio version intended to demonstrate the software engineering, data processing, testing, and system integration work involved in the project.
 
-## Project Scope
-Data Acquisition & NLP Pipeline
-The system acquires data from social media (such as Reddit) and well-known news outlets (such as The Guardian), ensuring data legitimacy and authority through official APIs. It removes spam/harmful information and standardizes fields such as timestamps, authors, and text. Multi-model ensembles (such as VADER, RoBERTa, and DistilBERT) are used to perform sentiment classification and confidence calculations on comment evidence levels. A two-stage "recall + rearrangement" pipeline (Bi-encoder ensemble and Cross-encoder) maps content to cultural dimensions and sub-topics. Monthly or source-based KPIs, such as sentiment ratio, sentiment balance index (SBI), and eNPS, are calculated. Finally, all processed information is stored, providing a consistent data source for the backend API.
+## Tech Stack
 
-System Architecture
-The backend uses the Flask REST API layer to handle requests, business logic, aggregations, and communicate with the database.The frontend uses the React and Tailwind technology stack to build the web application.
+### Backend and Data
+- Python
+- Flask
+- REST APIs
+- SQLite
+- NLP and machine learning
+- Data processing pipelines
 
-Core Features/UI
-Dashboard Overview: Provides a quick, high-level view of cultural signals, including post feeds, sentiment statistics, dimensional distribution, and a Sentiment Balance Index (SBI) trend line.
-Sentiment Trends: Summarizes monthly sentiment patterns (positive, negative, balanced signals), visually displaying how the sentiment climate changes over time.
-Dimension Explorer: Displays the distribution of cultural dimensions (such as leadership, safety, trust, and communication) in radar chart and ranked list formats.
-Post Explorer: Provides a detailed reading experience for individual posts or articles, including metadata, full text, and comments, to trace sentiment drivers.
-AI-Generated Insights: Offers multi-level, AI-generated insights on the "Culture Analytics" page, including: Executive Briefing: Summarizes the overall cultural climate. Risks & Opportunities: Highlights recurring cultural risks and potential opportunities. Actionable Recommendations: Provides practical, data-driven suggestions.
+### Frontend
+- React
+- Vite
+- Tailwind CSS
+- JavaScript
 
+### Engineering and DevOps
+- Git and GitHub
+- Docker
+- Docker Compose
+- GitHub Actions
+- Pytest
+- Vitest
+- React Testing Library
 
+## Project Overview
 
-## Project Structure
+The platform processes publicly available text from news and social media sources and transforms it into structured corporate culture insights.
 
+The processing workflow includes:
+
+1. Collecting text data through APIs and data collection scripts.
+2. Cleaning and standardising raw text and metadata.
+3. Applying sentiment analysis and NLP models.
+4. Mapping content to corporate culture dimensions and subthemes.
+5. Calculating analytical metrics and structured summaries.
+6. Exposing processed results through Flask REST APIs.
+7. Displaying results through an interactive React dashboard.
+
+The NLP pipeline includes sentiment classification, culture-dimension mapping, subtheme analysis, and structured AI-assisted reporting.
+
+## Key Features
+- Automated collection and preprocessing of public text data
+- Sentiment analysis and culture-dimension classification
+- Subtheme extraction and mapping
+- REST API access to processed analytical results
+- Interactive React analytics dashboard
+- AI-assisted structured summaries and recommendations
+- Backend unit and integration testing
+- Frontend component and interaction testing
+- Automated testing through GitHub Actions
+- Docker-based local deployment
+
+## My Contributions
+
+My contributions to the team project included:
+
+- Developing and integrating Python-based data processing workflows.
+- Supporting NLP and sentiment-analysis pipelines.
+- Working with REST APIs and backend data flows.
+- Integrating frontend components with backend API endpoints.
+- Testing system outputs and investigating inconsistent pipeline results.
+- Contributing to debugging, data transformation, and system integration.
+- Working collaboratively through Git branches, pull requests, and code review.
+
+## System Architecture
+
+External Data Sources
+        |
+        v
+Data Collection
+        |
+        v
+Cleaning and Transformation
+        |
+        v
+NLP / Sentiment / Classification
+        |
+        v
+Processed Data / SQLite
+        |
+        v
+Flask REST API
+        |
+        v
+React Dashboard
+
+## Repository Structure
+
+corporate-culture-monitor/
+|
+├── .github/
+│   └── workflows/              # CI and automated tests
+│
+├── backend/
+│   ├── server/                 # Backend service modules
+│   ├── tests/                  # Backend unit and integration tests
+│   ├── app.py                  # Flask application entry point
+│   ├── config.py               # Backend configuration
+│   ├── routes.py               # REST API routes
+│   ├── models.py               # Backend data models
+│   ├── pipeline.py             # Main data/NLP pipeline
+│   ├── data_process.py         # Core data processing workflow
+│   ├── data_process_llm.py     # LLM-assisted processing logic
+│   ├── suggestions.py          # Structured recommendation generation
+│   ├── utils.py                # Shared utilities
+│   └── requirements.txt        # Python dependencies
+│
+├── crawler/
+│   ├── aggregator.py           # Aggregates collected data
+│   ├── dataclean.py            # Data cleaning utilities
+│   ├── news_crawler.py         # News data collection
+│   └── reddit_data_process.py  # Reddit data preprocessing
+│
+├── data/
+│   └── processed/
+│       ├── build_news_db.py    # Build processed news database
+│       └── build_reddit_db.py  # Build processed Reddit database
+│
+├── frontend/
+│   ├── assets/                 # Static assets
+│   ├── public/                 # Public frontend files
+│   ├── routes/                 # Page-level route components
+│   ├── src/
+│   │   ├── __tests__/          # Frontend tests
+│   │   ├── components/         # Reusable UI components
+│   │   ├── api.js              # Backend API wrapper
+│   │   ├── App.jsx             # Main React application
+│   │   └── main.jsx            # Frontend entry point
+│   ├── Dockerfile
+│   ├── package.json
+│   └── vite.config.js
+│
+├── Dockerfile                  # Backend container configuration
+├── docker-compose.yml          # Backend and frontend orchestration
+├── package.json
+└── README.md
+
+## Data Availability
+
+The original datasets, local databases, generated reports, and model outputs are not included in this public repository.
+
+Raw news and social media datasets have been excluded from version control to keep the repository lightweight and avoid publishing unnecessary third-party data.
+
+The repository currently focuses on source code, data-processing logic, testing, software architecture, and deployment configuration.
+
+## Environment Variables
+
+Some optional functionality requires external API credentials.
+
+The application expects credentials to be provided through environment variables rather than hard-coded in source files.
+
+Supported variables include:
+
+```text
+NEWS_API_KEY
+GOOGLE_API_KEY
+OPENROUTER_API_KEY
 ```
-capstone-project-25t3-9900-f18a-donut/
-├─ .github/workflows                              # Setup CI workflow for backend pytest
-│
-├─ backend/                                       # Backend service layer (Flask API & model pipeline)
-│  ├─ app.py                                      # Main entry point of the backend, initializing the Flask app and loading all routes.
-│  ├─ config.py                                   # Configuration file defining paths, constants, and model locations.
-│  ├─ models.py                                   # Data models and structures used across the backend.
-│  ├─ routes.py                                   # Defines all API endpoints, handling frontend requests and returning JSON responses.
-│  ├─ utils.py                                    # Utility functions used across the backend for data loading, formatting, and helper tasks.
-│  ├─ requirements.txt                            # Python dependencies for backend 
-│  ├─ tests/..                                    # Backend unit tests for validating the NLP pipeline, data processing, and report generation modules.                          
-│  ├─ addmapping.py                               # Add or update mapping rules between subthemes and dimensions
-│  ├─ compare.py                                  # Compare outputs or data across different versions or runs
-│  ├─ data_process.py                             # Core data cleaning and preprocessing workflow
-│  ├─ data_process_llm.py                         # LLM-based data processing and text generation logic
-│  ├─ download_models.py                          # Download and initialize required NLP/ML models
-│  ├─ train_cr_encoder.py                         # Train the cultural-related text encoder model   
-│  ├─ sentiment_dbcheck.py                        # Validate sentiment database consistency and integrity
-│  ├─ mapping_sub2dim.py                          # Map subthemes → representatives → cultural dimensions
-│  ├─ subtheme_classify_cluster.py                # Classify and cluster subthemes into meaningful groups
-│  ├─ pipeline.py                                 # Main entry point for running the full NLP pipeline
-│  ├─ subthe_dimen_core.py                        # Core logic for loading, aggregating, and structuring subtheme/dimension data
-│  ├─ subthe_dimen_llm.py                         # LLM-powered expansion and reasoning for subthemes/dimensions
-│  ├─ subthe_dimen_sr.py                          # Generate structured reports for dimensions and subthemes
-│  ├─ overall_sr.py                               # Generate the overall cultural summary report
-│  ├─ suggestions.py                              # Main entry point for executing the full summarisation-and-recommendation generation pipeline
-│  └─ update_dimensions.py                        # Automatically update cultural dimension definitions and metadata
-│                                
-├─ crawler/                                       # Initial data collection and cleaning scripts
-│  ├─ reddit-crawler-master/..                    # Reddit crawling and raw data export
-│  ├─ aggregator.py                               # Combine and aggregate cleaned datasets
-│  ├─ dataclean.py                                # Data cleaning utilities
-│  ├─ news_crawler.py                             # News article crawler
-│  └─ reddit_data_process.py                      # Main pipeline for Reddit data preprocessing    
-│  
-├─ data/
-│  ├─ database/
-│  │  ├─ news_data.db                             # SQLite database storing processed news articles
-│  │  └─ reddit_data.db                           # SQLite database storing Reddit posts and comments
-│  ├─ dimension_sub/                              # Supporting files for dimension–subtheme sentiment mapping
-│  │  ├─ dimensions_sentiment_counts.csv          # Aggregated sentiment counts for each cultural dimension
-│  │  └─ subthemes_with_dim.csv                   # Mapping of subthemes to their corresponding dimensions
-│  ├─ processed/                                  # Code for building the database.
-│  │  ├─ build_news_db.py                         # Script for building the data SQLite database
-│  │  ├─ build_reddit_db.py                       # Script for building the Reddit comments SQLite database
-│  │  ├─ final_data_demoB.csv                     # Extracted data before preprocessing
-│  │  └─ comments_reddit.csv                      # Extracted Reddit comments before preprocessing
-│  ├─ raw/                                        # Raw and cleaned data from each source
-│  │  ├─ comments_cleaned.csv                     # Pre-cleaned Reddit comments
-│  │  ├─ guardian.csv                             # Raw articles collected from The Guardian
-│  │  ├─ News.csv                                 # Raw news dataset from multiple sources
-│  │  ├─ reddit_data.csv                          # Raw Reddit posts and comments before processing
-│  │  └─ SBI_month.csv                            # Monthly Sentiment Balance Index data
-│  └─ suggestion/                                 # AI-generated cultural insights and recommendations
-│     ├─ dimensions_sr/..                         # Dimension-level structured reports
-│     ├─ subthemes_sr/..                          # Subtheme-level structured reports
-│     ├─ overall_sr.json                          # Overall cultural summary generated by the system
-│     └─ subthemes_with_dim_update.csv            # Updated version of the subtheme–dimension mapping file
-│
-├─ frontend/                                      # React + Tailwind responsive web interface
-│  ├─ assets/icons                                # UI icon assets
-│  ├─ routes/                                     # Page-level route components
-│  │  ├─ CultureAnalysis.jsx                      # Culture Analysis main page
-│  │  └─ Dashboard.jsx                            # Dashboard overview page
-│  ├─ src/
-│  │  ├─ components/                              # Reusable UI components
-│  │  │  ├─ CalendarPanel.jsx                     # Calendar panel
-│  │  │  ├─ DimensionFilterPanel.jsx              # Dimension filter panel
-│  │  │  ├─ DimensionRadar.jsx                    # Dimension radar view
-│  │  │  ├─ DimensionRadarChart.jsx               # Radar chart rendering
-│  │  │  ├─ DimensionRadarLegend.jsx              # Radar chart legend
-│  │  │  ├─ PageTransition.jsx                    # Page transition wrapper
-│  │  │  ├─ PostFeed.jsx                          # Post feed list wrapper
-│  │  │  ├─ PostFeedDetail.jsx                    # Post detail view
-│  │  │  ├─ PostFeedList.jsx                      # Posts list renderer
-│  │  │  ├─ SentimentVenn.jsx                     # Sentiment Venn diagram
-│  │  │  ├─ Statistics.jsx                        # Summary statistics panel
-│  │  │  ├─ SuggestionSummary.jsx                 # AI suggestion summary
-│  │  │  └─ TopRouteTabs.jsx                      # Top navigation tabs
-│  │  ├─ api.js                                   # Backend API wrapper
-│  │  ├─ App.jsx                                  # Main app component
-│  │  ├─ index.css                                # Global styles
-│  │  └─ main.jsx                                 # React entrypoint
-│  ├─ Dockerfile                                  # Frontend Docker build config
-│  ├─ eslint.config.js                            # ESLint settings
-│  ├─ index.html                                  # Root HTML template
-│  └─ package.json                                # Project dependencies & scripts
-│
-├─ Dockerfile                                     # Docker build configuration for the backend service
-├─ docker-compose.yml                             # Orchestration for backend + frontend containers
-├─ package.json                                   # Project-level dependencies & scripts
-└─ README.md                                      # Project documentation and setup instructions
+
+Example PowerShell configuration:
+
+```powershell
+$env:NEWS_API_KEY="your-api-key"
+$env:GOOGLE_API_KEY="your-api-key"
+$env:OPENROUTER_API_KEY="your-api-key"
 ```
 
----
+API credentials are intentionally excluded from this repository.
 
-## System Architecture Diagram
+## Setup and Run
 
-![Org Chart](frontend/assets/Org_charts.png)
+### Backend
 
----
-
-## Setup & Run
-
-### Backend (Local)
+Create a Python virtual environment:
 
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate      # (Windows)
-# or
-source .venv/bin/activate     # (Mac)
+```
+
+Activate the environment on Windows:
+
+```powershell
+.venv\Scripts\activate
+```
+
+Activate the environment on macOS or Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+Run the backend:
+
+```bash
 python app.py
 ```
-🔗 http://localhost:5000
 
-### Frontend (Local)
+The backend runs locally at:
+
+```text
+http://localhost:5000
+```
+
+### Frontend
+
+Install frontend dependencies:
 
 ```bash
 cd frontend
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
-🔗 http://localhost:5173
 
-### Docker (Backend + Frontend)
-Run the following command from the project root directory to build and start all services:
+The frontend runs locally at:
+
+```text
+http://localhost:5173
+```
+
+## Docker
+
+The application can also be started with Docker Compose from the project root:
+
 ```bash
 docker-compose up --build
 ```
-Backend → http://localhost:5000 <br>
-Frontend → http://localhost:8080
 
-### Online Web Version
-```bash
-https://capstone-project-25t3-9900-f18a-donut-fn.onrender.com/dashboard
-```
-
----
+This builds and starts the backend and frontend services using the project Docker configuration.
 
 ## Testing
+
 ### Backend
-Our backend tests follow the project's testing guidelines:
 
-Unit tests verify:
+Backend tests use Pytest.
 
-- Data cleaning correctness
+The test suite covers areas including:
 
-- Sentiment re-check logic (happy & sad cases)
+- Data cleaning
+- Sentiment-processing logic
+- Subtheme-to-dimension mapping
+- Pipeline structure
+- Model-related processing
+- Structured report generation
+- Import and dependency validation
 
-- Subtheme→dimension mapping (mocked model behaviours)
+External LLM calls are mocked where appropriate to keep tests deterministic.
 
-- Clustering stability
+Run the backend tests with:
 
-- JSON report formatting and required fields
+```bash
+cd backend
+pytest
+```
 
+Additional backend testing documentation is available in:
 
-Integration tests validate:
+```text
+backend/tests/TESTING.md
+```
 
-- Pipeline structure remains consistent
-
-- Models load correctly
-
-- Full LLM-based report generation (mocked for determinism)
-
-
-External LLM calls are mocked to ensure deterministic test results.
-
-For full backend testing strategy, please refer to  [backend/tests/TESTING.md](backend/tests/TESTING.md)
-
+Backend tests are also integrated into the GitHub Actions workflow.
 
 ### Frontend
 
-Our frontend uses Vitest + React Testing Library to validate component behaviour, routing, and page-level state management.
-Tests focus on rendering correctness, user interactions, and deterministic logic by mocking external dependencies.
+Frontend tests use Vitest and React Testing Library.
 
-Unit & integration tests cover:
+Tests cover:
 
-Routing behaviour
-Ensures that /, /Dashboard, and /Culture-Analysis render the correct pages, with unknown routes redirecting to the dashboard.
+- Application routing
+- Component rendering
+- User interaction
+- Dashboard filters
+- Page state management
+- API-dependent behaviour using mocks
 
-PostFeed flip-card logic
-Validates default state, open/close interactions, flip animations, and handling of invalid keys (happy & sad cases).
+Run frontend tests with:
 
-Culture Analysis page state machine
-Tests interaction between dimension selection, subtheme selection, back navigation, and how props are passed to suggestion components.
+```bash
+cd frontend
+npm test
+```
 
-Dashboard coordination & filters
-Checks year/month filters, dimension filters, API-triggered refresh behaviour, and correct propagation of props to charts and PostFeed.
+Additional frontend testing documentation is available in:
 
-Mocking strategy includes:
+```text
+frontend/test.md
+```
 
-API calls (e.g., getSBI) to ensure deterministic results
+## Development Practices
 
-Router hooks via MemoryRouter
+The project uses:
 
-Heavy chart components replaced with lightweight mocks
+- Git-based version control
+- Pull-request-based collaboration
+- Automated testing
+- API-based frontend/backend integration
+- Containerised local deployment
+- Environment variables for external API credentials
+- Modular Python and React code organisation
 
-Browser APIs (fetch, IntersectionObserver) via setupTests.js
+## Project Context
 
-These tests ensure that the frontend behaves consistently under different states and interactions—independent from backend or chart-rendering complexity.
+This repository is a public portfolio version of a university capstone team project.
 
-For full frontend testing strategy, please refer to [frontend/test.md](frontend/test.md)
+Large datasets, local databases, generated reports, model weights, temporary files, and API credentials are intentionally excluded.
 
----
+The public repository focuses on source code, software architecture, data-processing workflows, testing, integration, and deployment configuration.
