@@ -1,0 +1,96 @@
+import React, { useState } from "react";
+import SuggestionSummary from "../src/components/SuggestionSummary";
+import DimensionFilterPanel from "../src/components/DimensionFilterPanel";
+import TopRouteTabs from "../src/components/TopRouteTabs";
+
+export default function CultureAnalysis() {
+  // Currently selected dimension
+  const [dimension, setDimension] = useState("");
+  // Tracks selected subtheme for back-navigation logic
+  const [_subtheme, setSubtheme] = useState("");
+  // The file name linked to the subtheme
+  const [subthemeFile, setSubthemeFile] = useState("");
+
+  return (
+    <div
+      className="min-h-screen font-display"
+      style={{ background: "rgb(242,241,237)" }} // Unified page background
+    >
+      <div
+        className="
+          px-7 pt-7 grid gap-x-6 gap-y-6
+          grid-cols-1
+          lg:grid-cols-[minmax(0,1fr)_minmax(300px,420px)]
+          xl:grid-cols-[minmax(0,1fr)_420px]
+        "
+      >
+        {/* Page title + description */}
+        <div className="row-start-1 col-start-1 flex items-center self-start min-w-0">
+          <div className="translate-y-[2px] min-w-0">
+            <h1 className="text-xl md:text-4xl font-semibold text-neutral-900 truncate">
+              AI-Powered Cultural Insight Analysis
+            </h1>
+            {/* Description is only shown on large screens */}
+            <p className="text-sm md:text-base text-neutral-500 hidden xl:block">
+              Here’s an AI-generated high-level analysis of organizational culture.
+            </p>
+          </div>
+        </div>
+
+        {/* Top route tabs (Dashboard / Culture Analysis / Statistics) */}
+        <div className="row-start-2 lg:row-start-1 col-start-1 lg:col-start-2 w-full self-start mt-1.5">
+          <TopRouteTabs />
+        </div>
+
+        {/* Right-side dimension filter panel.
+            On small screens this area shifts above the summary section. */}
+        <aside
+          className="
+            order-1 lg:order-2
+            row-start-3 lg:row-start-2
+            col-start-1 lg:col-start-2
+            lg:row-span-2
+          "
+        >
+          <DimensionFilterPanel
+            className="h-[720px]"
+            // Fired when a dimension/subtheme is selected
+            onSelect={(dim, sub, file) => {
+              setDimension(dim || "");
+              setSubtheme(sub || "");
+              setSubthemeFile(file || "");
+            }}
+          />
+        </aside>
+
+        {/* Main content area: shows Overall / Dimension / Subtheme summaries */}
+        <section
+          className="
+            order-2 lg:order-1
+            row-start-4 lg:row-start-2
+            col-start-1 lg:col-start-1
+          "
+        >
+          <SuggestionSummary
+            className="h-[720px]"
+            dimension={dimension}
+            subthemeFile={subthemeFile}
+            // Handles "back" navigation inside SuggestionSummary
+            onBack={(level) => {
+              if (level === "dimension") {
+                // Go from subtheme view back to dimension view
+                setSubtheme("");
+                setSubthemeFile("");
+              } else if (level === "overall") {
+                // Go all the way back to the overall summary
+                setDimension("");
+                setSubtheme("");
+                setSubthemeFile("");
+              }
+            }}
+          />
+        </section>
+      </div>
+    </div>
+  );
+}
