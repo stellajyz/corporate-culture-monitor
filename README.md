@@ -93,11 +93,10 @@ React Dashboard
 
 ## Repository Structure
 
+```text
 corporate-culture-monitor/
-|
 ├── .github/
 │   └── workflows/              # CI and automated tests
-│
 ├── backend/
 │   ├── server/                 # Backend service modules
 │   ├── tests/                  # Backend unit and integration tests
@@ -120,27 +119,28 @@ corporate-culture-monitor/
 │
 ├── data/
 │   └── processed/
-│       ├── build_news_db.py    # Build processed news database
-│       └── build_reddit_db.py  # Build processed Reddit database
+│       ├── build_news_db.py
+│       └── build_reddit_db.py
 │
 ├── frontend/
-│   ├── assets/                 # Static assets
-│   ├── public/                 # Public frontend files
-│   ├── routes/                 # Page-level route components
+│   ├── assets/
+│   ├── public/
+│   ├── routes/
 │   ├── src/
-│   │   ├── __tests__/          # Frontend tests
-│   │   ├── components/         # Reusable UI components
-│   │   ├── api.js              # Backend API wrapper
-│   │   ├── App.jsx             # Main React application
-│   │   └── main.jsx            # Frontend entry point
+│   │   ├── __tests__/
+│   │   ├── components/
+│   │   ├── api.js
+│   │   ├── App.jsx
+│   │   └── main.jsx
 │   ├── Dockerfile
 │   ├── package.json
 │   └── vite.config.js
 │
-├── Dockerfile                  # Backend container configuration
-├── docker-compose.yml          # Backend and frontend orchestration
+├── Dockerfile
+├── docker-compose.yml
 ├── package.json
 └── README.md
+```
 
 ## Data Availability
 
